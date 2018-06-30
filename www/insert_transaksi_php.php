@@ -42,11 +42,34 @@
 <body>
 
 <?php
+$db = mysql_connect('localhost','id6331087_root','demorele') or die("Database error");
+mysql_select_db('id6331087_penjualan', $db);
 
-$connection =mysql_connect("localhost","root","","penjualan") or die (mysql_error());
-mysql_select_db("penjualan",$connection) or die (mysql_error());
-$sql_p = mysql_query('SELECT * FROM pelanggan ORDER BY nama ASC;');
-$sql_b = mysql_query('SELECT * FROM barang ORDER BY nama_barang ASC;');
+//SOLUTION::  add this comment before your 1st query -- force multiLanuage support
+$result = mysql_query("set names 'utf8'");
+
+$query = "select * from pelanggan";
+$result = mysql_query($query); 
+
+/*
+$connection = mysqli_connect("localhost","id6331087_root","demorele");
+if (!$connection) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+
+$db_select = mysqli_select_db($connection, "id6331087_penjualan");
+if (!$db_select) {
+    die("Database selection failed: " . mysqli_error($connection));
+    
+}
+*/
+
+/*
+$connection =mysqli_connect("localhost","id6331087_root","demorele","id6331087_penjualan") or die (mysqli_error());
+mysqli_select_db("id6331087_penjualan",$connection) or die (mysqli_error());
+*/
+//$sql_p = mysql_query('SELECT * FROM pelanggan ORDER BY nama ASC;');
+//$sql_b = mysql_query('SELECT * FROM barang ORDER BY nama_barang ASC;');
 ?>
 
 
@@ -65,8 +88,8 @@ $sql_b = mysql_query('SELECT * FROM barang ORDER BY nama_barang ASC;');
  		<form action="" method="" >
  			<select name="pelanggan" id="nama">
  			<option>-- Pilih Pelanggan --</option>
- 				<?php if (mysql_num_rows($sql_p) > 0){ ?>
- 		 			<?php while ($row = mysql_fetch_array($sql_p)) { ?>
+ 				<?php if (mysql_num_rows($query) > 0){ ?>
+ 		 			<?php while ($row = mysql_fetch_array($query)) { ?>
  		  				<option><?php echo $row['nama'] ?></option>
  		  			<?php } ?>
  		  		<?php } ?>
