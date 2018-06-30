@@ -1,0 +1,31 @@
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/ionic.css">
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function()
+ {
+ var url="https://uasaganhanif.000webhostapp.com/json_transaksi.php";
+ $.getJSON(url,function(result){
+ console.log(result);
+ $.each(result, function(i, field){
+ var id_transaksi=field.id_transaksi;
+ var nama=field.nama;
+ var nama_barang=field.nama_barang;
+ var jml=field.jml;
+ $("#listview").append("<a class='item' href='form_transaksi_php.php?id_transaksi="+id_transaksi+"&nama="+nama+"&nama_barang="+nama_barang+"&jml="+jml+"'><span class='item-note'>"+jml+" kg</span><h2>"+ nama + " </h2><p>"+ nama_barang +"</p></a>");
+ });
+ });
+ });
+ </script>
+</head>
+<body>
+ <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+ <a href="index.html" class="button button-clear">Home</a>
+ <h1 class="title">Tabel Transaksi (JSON)</h1>
+ <a href="insert_transaksi.html" class="button button-clear">Insert Tabel Transaksi</a>
+ </div><br/><br/>
+ <ul class="list" id="listview">
+ </ul>
+</body>
+</html>
