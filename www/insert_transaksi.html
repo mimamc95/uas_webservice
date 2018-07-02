@@ -7,7 +7,7 @@
  $(document).ready(function()
  {
  $("#insert").click(function(){
- var nama=$("#nama").val();
+ var nama=$("#pelanggan").val();
  var nama_barang=$("#nama_barang").val();
  var jml=$("#jml").val();
  var dataString="nama="+nama+"&nama_barang="+nama_barang+"&jml="+jml+"&insert=";
@@ -38,9 +38,9 @@
         $.getJSON(url_pelanggan, function(result) {
             console.log(result);
             $.each(result, function(i, field) {
-                var id_pelanggan = field.id;
+//                 var id_pelanggan = field.id;
                 var nama = field.nama;
-                $("#pelanggan").append("<option value='"+id_pelanggan+"'>"+nama+"</option>");
+                $("#pelanggan").append("<option value='"+nama+"'>"+nama+"</option>");
                 // var duration = field.duration;
                 // var price = field.price;
                 // $("#listview").append("<a class='item' href='form.html?id=" + id + "&title=" + nama + "&duration=" + duration + "&price=" + price + "'><span class='item-note'>$" + price + "</span><h2>" + title + " </h2><p>" + duration + "</p></a>");
