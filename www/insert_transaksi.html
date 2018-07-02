@@ -34,7 +34,18 @@
  });
  }return false;
  });
- 
+        var url_pelanggan = "https://uasaganhanif.000webhostapp.com/json_pelanggan.php";
+        $.getJSON(url_pelanggan, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+                var id_pelanggan = field.id;
+                var nama = field.nama;
+                $("#pelanggan").append("<option value='"+id_pelanggan+"'>"+nama+"</option>");
+                // var duration = field.duration;
+                // var price = field.price;
+                // $("#listview").append("<a class='item' href='form.html?id=" + id + "&title=" + nama + "&duration=" + duration + "&price=" + price + "'><span class='item-note'>$" + price + "</span><h2>" + title + " </h2><p>" + duration + "</p></a>");
+            });
+        });
  
  });
  </script>
@@ -49,7 +60,7 @@
  <input type="hidden" id="id" value=""/>
  <div class="item">
  <label>Nama Pelanggan</label>
- <input type="text" id="nama" value=""/>
+  <select id="pelanggan"></select>
  </div>
  <div class="item">
  <label>Nama Barang</label>
