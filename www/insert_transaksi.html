@@ -7,7 +7,7 @@
  $(document).ready(function()
  {
  $("#insert").click(function(){
- var nama=$("#pelanggan").val();
+ var nama=$("#nama").val();
  var nama_barang=$("#nama_barang").val();
  var jml=$("#jml").val();
  var dataString="nama="+nama+"&nama_barang="+nama_barang+"&jml="+jml+"&insert=";
@@ -34,19 +34,27 @@
  });
  }return false;
  });
-        var url_pelanggan = "https://uasaganhanif.000webhostapp.com/json_pelanggan.php";
-        $.getJSON(url_pelanggan, function(result) {
+
+ 	    var url_nama = "https://uasaganhanif.000webhostapp.com/json_pelanggan.php";
+        $.getJSON(url_nama, function(result) {
             console.log(result);
             $.each(result, function(i, field) {
-//                 var id_pelanggan = field.id;
+//             var id_pelanggan = field.id;
                 var nama = field.nama;
-                $("#pelanggan").append("<option value='"+nama+"'>"+nama+"</option>");
-                // var duration = field.duration;
-                // var price = field.price;
-                // $("#listview").append("<a class='item' href='form.html?id=" + id + "&title=" + nama + "&duration=" + duration + "&price=" + price + "'><span class='item-note'>$" + price + "</span><h2>" + title + " </h2><p>" + duration + "</p></a>");
-            });
+                $("#nama").append("<option value='"+nama+"'>"+nama+"</option>");
+             });
         });
  
+
+  var url_nama_barang = "https://uasaganhanif.000webhostapp.com/json_barang.php";
+        $.getJSON(url_nama_barang, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+//              var id_pelanggan = field.id;
+                var nama_barang = field.nama_barang;
+                $("#nama_barang").append("<option value='"+nama_barang+"'>"+nama_barang+"</option>");
+             });
+        });
  });
  </script>
 </head>
@@ -56,20 +64,23 @@
  <h1 class="title">Tabel Transaksi</h1>
  <a class="button button-clear" href="json_transaksi.html">Read Transaksi</a>
  </div><br/><br/>
+
  <div class="list">
  <input type="hidden" id="id" value=""/>
+ 
  <div class="item">
- <label>Nama Pelanggan</label>
-  <select id="pelanggan"></select>
- </div>
+	 <label>Nama Pelanggan</label><br/><br/>
+	 <select id="nama"></select>
+</div>
+<div class="item">
+	 <label>Nama Barang</label><br/><br/>
+	 <select id="nama_barang"></select>
+</div>
  <div class="item">
- <label>Nama Barang</label>
- <input type="text" id="nama_barang" value=""/>
+	 <label>Jumlah</label>
+	 <input type="text" id="jml" value=""/>
  </div>
- <div class="item">
- <label>Jumlah</label>
- <input type="text" id="jml" value=""/>
- </div>
+
  <div class="item">
  <input type="button" id="insert" class="button button-block" value="Insert"/>
  </div>

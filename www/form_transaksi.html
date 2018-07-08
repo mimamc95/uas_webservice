@@ -24,6 +24,9 @@
       var jml=$("#jml").val();
       var dataString="id_transaksi="+id_transaksi+"&nama="+nama+"&nama_barang="+nama_barang+"&jml="+jml+"&update=";
 	  if($.trim(id_transaksi).length>0 & $.trim(nama).length>0 & $.trim(nama_barang).length>0 & $.trim(jml).length>0)
+
+
+
 	 {
 		$.ajax({
 		type: "POST",
@@ -47,6 +50,20 @@
 	 }return false;
     });
  
+//$("#listview").append("<a class='item' href='form_transaksi.html?id_transaksi="+id_transaksi+"&nama="+nama+"&nama_barang="+nama_barang+"&jml="+jml+"'><span class='item-note'>"+ jml +" kg</span><h2>"+ nama +" </h2><p>"+ nama_barang +"</p></a>");
+
+		var url_nama_barang = "https://uasaganhanif.000webhostapp.com/json_barang.php";
+        $.getJSON(url_nama_barang, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+            	var id_transaksi = field.id_transaksi;
+                var nama_barang = field.nama_barang;
+                $("#nama_barang").append("<option value='"+nama_barang+"'>"+nama_barang+"</option>");
+                //$("#nama").append("<option value= '"id_transaksi="+id_transaksi+"&nama="+nama"'>"+nama+"</option>");
+             });
+        });
+
+
  
     $("#delete").click(function(){
 	  var id_transaksi=$("#id_transaksi").val();
@@ -71,6 +88,8 @@
 	   }
 	  });
  	});
+
+
  
  });
  </script>
@@ -90,13 +109,14 @@
  		<input type="hidden" id="id_transaksi" value=""/>
 
  	<div class="item">
- 		<label>Nama Pelanggan</label><br/><br/>
- 		<input type="text" id="nama" value=""/>
- 	</div>
+	 <label>Nama Pelanggan</label><br/><br/>
+	 <input type="text" id="nama" value=""/>
+	</div>
 
  	<div class="item" >
- 		<label>Nama Barang</label>
- 		<input type="text" id="nama_barang" value=""/>
+ 		<label>Nama Barang</label><br/><br/>
+ 		 <select id="nama_barang"></select>
+ 		
  	</div>
 
  	<div class="item">
