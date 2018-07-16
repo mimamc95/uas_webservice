@@ -5,7 +5,7 @@
  <script type="text/javascript">
  $(document).ready(function()
  {
- var url="http://localhost/uas_webservice/php-code/json_transaksi.php";
+ var url="https://mimamc95.000webhostapp.com/php-code/json_transaksi.php";
  $.getJSON(url,function(result){
  console.log(result);
  $.each(result, function(i, field){
@@ -14,7 +14,7 @@
  var kendaraan=field.kendaraan;
  var biaya=field.biaya;
  
- $("#listview").append("<a class='item' href='form_transaksi.html?id_tran="+id_tran+"&plat="+plat+"&kendaraan="+kendaraan+"&biaya="+biaya+"'><span class='item-note'>Plat Nomot: "+plat+"</span><h2>Kendaraan: "+ kendaraan + " </h2><p>Biaya: "+ biaya +"</p></a>");
+ $("#listview").append("<a class='item' href='form_transaksi.html?id_tran="+id_tran+"&plat="+plat+"&kendaraan="+kendaraan+"&biaya="+biaya+"'><span class='item-note'>Plat Nomor: "+plat+"</span><h2>Kendaraan: "+ kendaraan + " </h2><p>Biaya: "+ biaya +"</p></a>");
  
  });
  });
