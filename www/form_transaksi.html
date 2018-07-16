@@ -1,0 +1,106 @@
+
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/ionic.css">
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript" src="js/geturi.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function()
+ {
+ var id_tran = decodeURI(getUrlVars()["id_tran"]);
+ var biaya = decodeURI(getUrlVars()["biaya"]);
+ var kendaraan = decodeURI(getUrlVars()["kendaraan"]);
+ var plat = decodeURI(getUrlVars()["plat"]);
+ $("#id_tran").val(id_tran);
+ $("#biaya").val(biaya);
+ $("#kendaraan").val(kendaraan);
+ $("#plat").val(plat);
+ 
+ 
+	$("#update").click(function(){
+      var id_tran=$("#id_tran").val();
+      var biaya=$("#biaya").val();
+      var kendaraan=$("#kendaraan").val();
+      var plat=$("#plat").val();
+      var dataString="id_tran="+id_tran+"&biaya="+biaya+"&kendaraan="+kendaraan+"&plat="+plat+"&update=";
+	  if($.trim(id_tran).length>0 & $.trim(biaya).length>0 & $.trim(kendaraan).length>0 & $.trim(plat).length>0)
+	 {
+		$.ajax({
+		type: "POST",
+		url:"http://localhost/uas_webservice/php-code/update_transaksi.php",
+		data: dataString,
+		crossDomain: true,
+		cache: false,
+		beforeSend: function(){ $("#update").val('Connecting...');},
+		success: function(data){
+		if(data=="success")
+		{
+		//alert("Updated");
+		$("#update").val("submit");
+		}
+		else if(data=="error")
+		{
+		alert("error");
+		}
+	   }
+	  });
+	 }return false;
+    });
+ 
+ 
+    $("#delete").click(function(){
+	  var id_tran=$("#id_tran").val();
+	  var dataString="id_tran="+id_tran+"&delete=";
+		$.ajax({
+		type: "GET",
+		url:"http://localhost/uas_webservice/php-code/delete_transaksi.php",
+		data: dataString,
+		crossDomain: true,
+		cache: false,
+		beforeSend: function(){ $("#delete").val('Connecting...');},
+		success: function(data){
+		if(data=="success")
+		{
+		alert("Deleted");
+		$("#delete").val("Delete");
+		}
+		else if(data=="error")
+		{
+		alert("error");
+		}
+	   }
+	  });
+ 	});
+ 
+ });
+ </script>
+</head>
+<body>
+ <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+ <a href="index.html" class="button button-clear">Home</a>
+ <h1 class="title">Tabel Transaksi</h1>
+ <a class="button button-clear" href="json_transaksi.html">Read JSON Transaksi</a>
+ </div><br/><br/>
+ 
+ <div class="list">
+ <input type="hidden" id="id_tran" value=""/>
+ <div class="item">
+ <label>Plat</label>
+ <input type="text" id="plat" value=""/>
+ </div>
+ <div class="item">
+ <label>Kendaraan</label>
+ <input type="text" id="kendaraan" value=""/>
+ </div>
+ <div class="item">
+ <label>Biaya</label>
+ <input type="text" id="biaya" value=""/>
+ </div>
+ <div class="item">
+ <input type="button" id="update" class="button button-block" value="Update"/>
+ <input type="button" id="delete" class="button button-block" value="Delete"/>
+ </div>
+ </div>
+ 
+</body>
+</html>

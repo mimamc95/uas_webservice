@@ -1,0 +1,60 @@
+
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/ionic.css">
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function(){
+ 
+ $("#insert").click(function(){
+ var salju=$("#salju").val();
+ var pijat=$("#pijat").val(); 
+ var gratis=$("#gratis").val();
+ 
+ var dataString="salju="+salju+"&pijat="+pijat+"&gratis="+gratis+"&insert=";
+ if($.trim(salju).length>0 & $.trim(pijat).length>0 & $.trim(gratis).length>0)
+ {
+	$.ajax({
+	type: "POST",
+	url:"http://localhost/uas_webservice/php-code/insert_fasilitas.php",
+	data: dataString,
+	crossDomain:true,
+	cache:false,
+	beforeSend: function(){ $("#insert").val('Connecting...');},
+	success: function(data){
+			alert("Berhasil...!");
+			$("#insert").val('update');
+		}
+	});
+ }return false;
+ });
+ 
+});
+ </script>
+</head>
+<body>
+ <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+ <a class="button button-clear" href="index.html">Home</a>	
+ <h1 class="title">Tabel Fasilitas</h1>
+ <a class="button button-clear" href="json_fasilitas.html">Read JSON Fasilitas</a>
+ </div><br/><br/>
+ <div class="list">
+ <input type="hidden" id="id_ide" value=""/>
+ <div class="item">
+ <label>Cuci Salju </label>
+ <input type="text" id="salju" value=""/>
+ </div>
+ <div class="item">
+ <label>Pijat Capek</label>
+ <input type="text" id="pijat" value=""/>
+ </div>
+ <div class="item">
+ <label>Gratis Cuci /8x</label>
+ <input type="text" id="gratis" value=""/>
+ </div>
+ <div class="item">
+ <input type="button" id="insert" class="button button-block" value="Insert"/>
+ </div>
+ </div>
+</body>
+</html>

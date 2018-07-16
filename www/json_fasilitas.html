@@ -1,0 +1,31 @@
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/ionic.css">
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function(){
+ 
+ var url="http://localhost/uas_webservice/php-code/json_fasilitas.php";
+ $.getJSON(url,function(result){
+	$.each(result, function(i, field){
+		var id_fas=field.id_fas;
+		var salju=field.salju;
+		var pijat=field.pijat;
+		var gratis=field.gratis;
+ 
+		$("#listview").append("<a class='item' href='form_fasilitas.html?id_fas="+id_fas+"&salju="+salju+"&pijat="+pijat+"&gratis="+gratis+"'><span class='item-note'>Cuci Salju: "+salju+"</span><h2>Pijat Capek: "+ pijat + " </h2><p>Gratis Cuci: "+ gratis +"</p></a>");
+	});
+ });
+ });
+ </script>
+</head>
+<body>
+ <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+ <a href="index.html" class="button button-clear">Home</a>
+ <h1 class="title">JSON Fasilitas</h1>
+ <a href="insert_fasilitas.html" class="button button-clear">Insert Fasilitas</a>
+ </div><br/><br/>
+ <ul class="list" id="listview">
+ </ul>
+</body>
+</html>

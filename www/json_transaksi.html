@@ -1,0 +1,33 @@
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/ionic.css">
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function()
+ {
+ var url="http://localhost/uas_webservice/php-code/json_transaksi.php";
+ $.getJSON(url,function(result){
+ console.log(result);
+ $.each(result, function(i, field){
+ var id_tran=field.id_tran;
+ var plat=field.plat;
+ var kendaraan=field.kendaraan;
+ var biaya=field.biaya;
+ 
+ $("#listview").append("<a class='item' href='form_transaksi.html?id_tran="+id_tran+"&plat="+plat+"&kendaraan="+kendaraan+"&biaya="+biaya+"'><span class='item-note'>Plat Nomot: "+plat+"</span><h2>Kendaraan: "+ kendaraan + " </h2><p>Biaya: "+ biaya +"</p></a>");
+ 
+ });
+ });
+ });
+ </script>
+</head>
+<body>
+ <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+ <a href="index.html" class="button button-clear">Home</a>
+ <h1 class="title">JSON Transaksi</h1>
+ <a href="insert_transaksi.html" class="button button-clear">Insert Transaksi</a>
+ </div><br/><br/>
+ <ul class="list" id="listview">
+ </ul>
+</body>
+</html>

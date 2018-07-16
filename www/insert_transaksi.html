@@ -1,0 +1,74 @@
+
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/ionic.css">
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function()
+ {
+ $("#insert").click(function(){
+ 
+ var plat=$("#plat").val();
+ var kendaraan=$("#kendaraan").val();
+ var biaya=$("#biaya").val();
+ 
+ var dataString="plat="+plat+"&kendaraan="+kendaraan+"&biaya="+biaya+"&insert=";
+ if($.trim(plat).length>0 & $.trim(kendaraan).length>0 & $.trim(biaya).length>0)
+ 
+ {
+ $.ajax({
+ type: "POST",
+ url:"http://localhost/uas_webservice/php-code/insert_transaksi.php",
+ data: dataString,
+ crossDomain: true,
+ cache: false,
+ beforeSend: function(){ $("#insert").val('Connecting...');},
+ success: function(data){
+ 
+ alert("Berhasil");
+ $("#insert").val('update');
+ 
+ }
+ });
+ }return false;
+ });
+ /*
+        var url_identitas = "http://localhost/php-code/json_identitas.php";
+        $.getJSON(url_identitas, function(result) {
+            console.log(result);
+            $.each(result, function(i, field) {
+                var nama = field.nama;
+                $("#identitas").append("<option value='"+nama+"'>"+nama+"</option>");
+                 });
+        });
+ */
+ });
+ </script>
+</head>
+<body>
+ <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+ <a class="button button-clear" href="index.html">Home</a>	
+ <h1 class="title">Tabel Transaksi</h1>
+ <a class="button button-clear" href="json_transaksi.html">Read Transaksi</a>
+ </div><br/><br/>
+ 
+ <div class="list">
+ <input type="hidden" id="id_tran" value=""/>
+ <div class="item">
+ <label>Plat Nomor</label>
+ <input type="text" id="plat" value=""/> 
+ </div>
+ <div class="item">
+ <label>Kendaraan</label>
+ <input type="text" id="kendaraan" value=""/>
+ </div>
+ <div class="item">
+ <label>Biaya</label>
+ <input type="text" id="biaya" value=""/>
+ </div>
+ <div class="item">
+ <input type="button" id="insert" class="button button-block" value="Insert"/>
+ </div>
+ </div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/ionic.css">
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function(){
+ 
+ var url="http://localhost/uas_webservice/php-code/json_identitas.php";
+ $.getJSON(url,function(result){
+	$.each(result, function(i, field){
+		var id_ide=field.id_ide;
+		var nama=field.nama;
+		var plat=field.plat;
+		var kendaraan=field.kendaraan;
+ 
+		$("#listview").append("<a class='item' href='form_identitas.html?id_ide="+id_ide+"&nama="+nama+"&plat="+plat+"&kendaraan="+kendaraan+"'><span class='item-note'>Nama: "+nama+"</span><h2>Plat Nomor: "+ plat + " </h2><p>Kendaraan: "+ kendaraan +"</p></a>");
+	});
+ });
+ });
+ </script>
+</head>
+<body>
+ <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+ <a href="index.html" class="button button-clear">Home</a>
+ <h1 class="title">JSON Identitas</h1>
+ <a href="insert_identitas.html" class="button button-clear">Insert Identitas</a>
+ </div><br/><br/>
+ <ul class="list" id="listview">
+ </ul>
+</body>
+</html>

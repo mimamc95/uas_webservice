@@ -1,0 +1,106 @@
+
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/ionic.css">
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript" src="js/geturi.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function()
+ {
+ var id_fas = decodeURI(getUrlVars()["id_fas"]);
+ var salju = decodeURI(getUrlVars()["salju"]);
+ var pijat = decodeURI(getUrlVars()["pijat"]);
+ var gratis = decodeURI(getUrlVars()["gratis"]);
+ $("#id_fas").val(id_fas);
+ $("#salju").val(salju);
+ $("#pijat").val(pijat);
+ $("#gratis").val(gratis);
+ 
+ 
+	$("#update").click(function(){
+      var id_fas=$("#id_fas").val();
+      var salju=$("#salju").val();
+      var pijat=$("#pijat").val();
+      var gratis=$("#gratis").val();
+      var dataString="id_fas="+id_fas+"&salju="+salju+"&pijat="+pijat+"&gratis="+gratis+"&update=";
+	  if($.trim(id_fas).length>0 & $.trim(salju).length>0 & $.trim(pijat).length>0 & $.trim(gratis).length>0)
+	 {
+		$.ajax({
+		type: "POST",
+		url:"http://localhost/uas_webservice/php-code/update_fasilitas.php",
+		data: dataString,
+		crossDomain: true,
+		cache: false,
+		beforeSend: function(){ $("#update").val('Connecting...');},
+		success: function(data){
+		if(data=="success")
+		{
+		//alert("Updated");
+		$("#update").val("submit");
+		}
+		else if(data=="error")
+		{
+		alert("error");
+		}
+	   }
+	  });
+	 }return false;
+    });
+ 
+ 
+    $("#delete").click(function(){
+	  var id_fas=$("#id_fas").val();
+	  var dataString="id_fas="+id_fas+"&delete=";
+		$.ajax({
+		type: "GET",
+		url:"http://localhost/uas_webservice/php-code/delete_fasilitas.php",
+		data: dataString,
+		crossDomain: true,
+		cache: false,
+		beforeSend: function(){ $("#delete").val('Connecting...');},
+		success: function(data){
+		if(data=="success")
+		{
+		alert("Deleted");
+		$("#delete").val("Delete");
+		}
+		else if(data=="error")
+		{
+		alert("error");
+		}
+	   }
+	  });
+ 	});
+ 
+ });
+ </script>
+</head>
+<body>
+ <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+ <a href="index.html" class="button button-clear">Home</a>
+ <h1 class="title">Tabel Fasilitas</h1>
+ <a class="button button-clear" href="json_fasilitas.html">Read JSON Fasilitas</a>
+ </div><br/><br/>
+ 
+ <div class="list">
+ <input type="hidden" id="id_fas" value=""/>
+ <div class="item">
+ <label>Cuci Salju</label>
+ <input type="text" id="salju" value=""/>
+ </div>
+ <div class="item">
+ <label>Pijat Capek</label>
+ <input type="text" id="pijat" value=""/>
+ </div>
+ <div class="item">
+ <label>Gratis Cuci /8x</label>
+ <input type="text" id="gratis" value=""/>
+ </div>
+ <div class="item">
+ <input type="button" id="update" class="button button-block" value="Update"/>
+ <input type="button" id="delete" class="button button-block" value="Delete"/>
+ </div>
+ </div>
+ 
+</body>
+</html>
